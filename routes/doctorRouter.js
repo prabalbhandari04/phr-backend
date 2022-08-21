@@ -1,0 +1,25 @@
+const router = require('express').Router()
+const doctorCtrl = require('../controllers/doctorController')
+// const authDoctor = require('../middleware/authDoctor')
+const auth = require('../middleware/auth')
+const authAdmin = require('../middleware/authAdmin')
+const authDoctor = require('../middleware/authDoctor')
+
+
+router.post('/register', doctorCtrl.register)
+router.post('/activation', doctorCtrl.activateEmail)
+router.post('/login', doctorCtrl.login)
+router.post('/refresh_token', doctorCtrl.getAccessToken)
+router.post('/forgot', doctorCtrl.forgotPassword)
+router.post('/reset', authDoctor, doctorCtrl.resetPassword)
+router.get('/docinfo/:id', doctorCtrl.getDoctorInfo)
+router.get('/allinfo',  doctorCtrl.getDoctorAllInfo)
+router.get('/logout', doctorCtrl.logout)
+router.patch('/update', authDoctor, doctorCtrl.updateDoctor)
+router.delete('/delete/:id', doctorCtrl.deleteDoctor)
+router.patch('/update_role/:id', doctorCtrl.updateDoctorsRole)
+router.post('/google_login', doctorCtrl.googleLogin)
+router.post('/facebook_login', doctorCtrl.facebookLogin)
+router.post('/doctor-share', doctorCtrl.doctorShare)
+
+module.exports = router
